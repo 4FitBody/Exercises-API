@@ -1,7 +1,5 @@
 using Azure.Identity;
-using Azure.Storage;
 using Azure.Storage.Blobs;
-using Azure.Storage.Blobs.Models;
 
 namespace Exercises_API.Infrastructure.Services;
 
@@ -10,15 +8,15 @@ public class BlobContainerService
     private readonly BlobServiceClient blobServiceClient;
     private readonly BlobContainerClient blobContainerClient;
 
-    public BlobContainerService()
+    public BlobContainerService(string url, string containerName)
     {
         this.blobServiceClient = new BlobServiceClient
         (
-            new Uri("https://4fitbodystorage.blob.core.windows.net/"),
+            new Uri(url),
             new DefaultAzureCredential()
         );
 
-        this.blobContainerClient = this.blobServiceClient.GetBlobContainerClient("exercise-images");
+        this.blobContainerClient = this.blobServiceClient.GetBlobContainerClient(containerName);
     }
 
     public async Task UploadAsync(Stream stream, string path)
