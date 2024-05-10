@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var blobOptionsSection = builder.Configuration.GetSection("BlobOptions");
 
-var blobOptions = blobOptionsSection.Get<BlobOptions>() ?? throw new Exception("Couldn't create jwt options object");
+var blobOptions = blobOptionsSection.Get<BlobOptions>() ?? throw new Exception("Couldn't create blob options object");
 
 builder.Services.Configure<BlobOptions>(blobOptionsSection);
 
@@ -41,38 +41,11 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(options =>
 {
-    const string scheme = "Bearer";
-
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Title = "4FitBody (api for working staff)",
         Version = "v1"
     });
-
-    options.AddSecurityDefinition(
-        name: scheme,
-
-        new OpenApiSecurityScheme() {
-            Description = "Enter here jwt token with Bearer",
-            In = ParameterLocation.Header,
-            Name = "Authorization",
-            Type = SecuritySchemeType.Http,
-            Scheme = scheme
-        });
-
-    options.AddSecurityRequirement(
-        new OpenApiSecurityRequirement() {
-            {
-                new OpenApiSecurityScheme() {
-                    Reference = new OpenApiReference() {
-                        Id = scheme,
-                        Type = ReferenceType.SecurityScheme
-                    }
-                } ,
-                new string[] {}
-            }
-        }
-    );
 });
 
 builder.Services.AddAuthentication();
