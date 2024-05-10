@@ -1,4 +1,4 @@
-namespace Exercises_API.Core.Exercises.Models;
+namespace Exercises_API.Core.Models;
 
 public class Exercise
 {

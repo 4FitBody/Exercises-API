@@ -1,10 +1,10 @@
 namespace Exercises_API.Core.Repositories;
 
-using Exercises_API.Core.Exercises.Models;
+using Exercises_API.Core.Models;
 
 public interface IExerciseRepository
 {
-    Task<IEnumerable<Exercise>?> GetAllAsync();
+    IEnumerable<Exercise>? GetAll();
     Task CreateAsync(Exercise exercise);
     Task DeleteAsync(int id);
     Task UpdateAsync(int id, Exercise exercise);
