@@ -22,4 +22,10 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Exercises-API.Core\Exercises-API.Core.csproj" />
+    <ProjectReference Include="..\..\src\Exercises-API.Infrastructure\Exercises-API.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Exercises-API.Presentation\Exercises-API.Presentation.csproj" />
+  </ItemGroup>
+
 </Project>
