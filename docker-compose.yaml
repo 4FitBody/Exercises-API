@@ -1,0 +1,41 @@
+version: '2.2'
+
+services:
+  exerciseapiapp:
+    image: exerciseapi
+    container_name: exerciseapiapp
+    depends_on:
+      - mongodb
+    build:
+      context: .
+      dockerfile: Dockerfile
+    expose:
+      - 8080
+    ports:
+      - 10010:8080
+    networks:
+      - exercisebridgenetwork
+    restart: always
+
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    expose:
+      - 27017
+    ports:
+      - 27017:27017
+    networks:
+      - exercisebridgenetwork
+    volumes:
+      - mymongovolume:/data/db
+      - mymongovolume:/data/configdb
+    restart: always
+
+  
+
+networks:
+  exercisebridgenetwork:
+    driver: bridge
+
+volumes:
+  mymongovolume:
