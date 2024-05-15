@@ -1,6 +1,4 @@
-using System.Reflection;
 using Microsoft.OpenApi.Models;
-using Microsoft.EntityFrameworkCore;
 using Exercises_API.Core.Repositories;
 using Exercises_API.Presentation.Options;
 using Exercises_API.Infrastructure.Repositories;
