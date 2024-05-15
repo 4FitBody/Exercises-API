@@ -5,7 +5,7 @@ services:
     image: exerciseapi
     container_name: exerciseapiapp
     depends_on:
-      - mongodb
+      - exercisesmongodb
     build:
       context: .
       dockerfile: Dockerfile
@@ -17,9 +17,9 @@ services:
       - exercisebridgenetwork
     restart: always
 
-  mongodb:
+  exercisesmongodb:
     image: mongo
-    container_name: mongodb
+    container_name: exercisesmongodb
     expose:
       - 27017
     ports:
