@@ -16,7 +16,7 @@ public class GetAllHandler : IRequestHandler<GetAllQuery, IEnumerable<Exercise>>
 
     public async Task<IEnumerable<Exercise>>? Handle(GetAllQuery request, CancellationToken cancellationToken)
     {
-        var exercises = this.exerciseRepository.GetAll();
+        var exercises = await this.exerciseRepository.GetAllAsync();
 
         if (exercises is null)
         {
