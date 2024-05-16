@@ -25,7 +25,7 @@ services:
     ports:
       - 27017:27017
     networks:
-      - exercisebridgenetwork
+      - mongobridgenetwork
     volumes:
       - mymongovolume:/data/db
       - mymongovolume:/data/configdb
@@ -34,7 +34,7 @@ services:
   
 
 networks:
-  exercisebridgenetwork:
+  mongobridgenetwork:
     driver: bridge
 
 volumes:

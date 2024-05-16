@@ -5,9 +5,9 @@ using MediatR;
 
 public class GetByIdQuery : IRequest<Exercise>
 {
-    public int? Id { get; set; }
+    public int Id { get; set; }
 
-    public GetByIdQuery(int? id)
+    public GetByIdQuery(int id)
     {
         this.Id = id;
     }

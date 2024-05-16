@@ -15,7 +15,7 @@ public class GetByIdHandler : IRequestHandler<GetByIdQuery, Exercise>
     {
         ArgumentNullException.ThrowIfNull(request.Id);
 
-        var exercise = await this.exerciseRepository.GetByIdAsync((int)request.Id);
+        var exercise = await this.exerciseRepository.GetByIdAsync(request.Id);
 
         if (exercise is null)
         {

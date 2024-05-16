@@ -34,12 +34,12 @@ public class ExerciseController : ControllerBase
 
         var exercises = await this.sender.Send(getAllQuery);
 
-        return base.Ok(exercises.Where(exercise => exercise.IsApproved));
+        return base.Ok(exercises);
     }
 
     [HttpGet]
     [Route("/api/[controller]/[action]/{id}")]
-    public async Task<IActionResult> Details(int? id)
+    public async Task<IActionResult> Details(int id)
     {
         var getByIdQuery = new GetByIdQuery(id);
 
@@ -75,7 +75,7 @@ public class ExerciseController : ControllerBase
             Equipment = exerciseContent.Exercise.Equipment,
             Target = exerciseContent.Exercise.Target,
             IsApproved = false,
-            GifUrl = "https://4fitbodystorage.blob.core.windows.net/images/" + path,
+            GifUrl = "https://4fitbodystorage.blob.core.windows.net/exercise-images/" + path,
             SecondaryMuscles = exerciseContent.Exercise.SecondaryMuscles!,
             Instructions = exerciseContent.Exercise.Instructions!,
         };
@@ -91,7 +91,7 @@ public class ExerciseController : ControllerBase
 
     [HttpDelete]
     [Route("/api/[controller]/[action]/{id}")]
-    public async Task<IActionResult> Delete(int? id)
+    public async Task<IActionResult> Delete(int id)
     {
         var createCommand = new DeleteCommand(id);
 
@@ -102,7 +102,7 @@ public class ExerciseController : ControllerBase
 
     [HttpPut]
     [Route("/api/[controller]/[action]/{id}")]
-    public async Task<IActionResult> Update(int? id, [FromBody] ExerciseDto exerciseDto)
+    public async Task<IActionResult> Update(int id, [FromBody] ExerciseDto exerciseDto)
     {
         var exercise = new Exercise
         {
@@ -111,8 +111,8 @@ public class ExerciseController : ControllerBase
             Equipment = exerciseDto.Equipment,
             Target = exerciseDto.Target,
             IsApproved = false,
-            SecondaryMuscles = exerciseDto.SecondaryMuscles!.Split("; "),
-            Instructions = exerciseDto.Instructions!.Split("; "),
+            SecondaryMuscles = exerciseDto.SecondaryMuscles!,
+            Instructions = exerciseDto.Instructions!,
         };
 
         var createCommand = new UpdateCommand(id, exercise);

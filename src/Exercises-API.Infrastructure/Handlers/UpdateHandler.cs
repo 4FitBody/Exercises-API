@@ -18,6 +18,6 @@ public class UpdateHandler : IRequestHandler<UpdateCommand>
 
         ArgumentNullException.ThrowIfNull(request.Exercise);
 
-        await this.exerciseRepository.UpdateAsync((int)request.Id, request.Exercise);
+        await this.exerciseRepository.UpdateAsync(request.Id, request.Exercise);
     }
 }

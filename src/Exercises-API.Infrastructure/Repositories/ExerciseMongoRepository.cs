@@ -8,6 +8,7 @@ public class ExerciseMongoRepository : IExerciseRepository
 {
     private readonly IMongoDatabase exercisesDb;
     private readonly IMongoCollection<Exercise> collection;
+    private readonly IMongoCollection<ExericseIndex> idCollection;
 
     public ExerciseMongoRepository(string connestionstring, string db, string collection)
     {
@@ -16,11 +17,13 @@ public class ExerciseMongoRepository : IExerciseRepository
         this.exercisesDb = client.GetDatabase(db);
 
         this.collection = this.exercisesDb.GetCollection<Exercise>(collection);
+
+        this.idCollection = this.exercisesDb.GetCollection<ExericseIndex>("ExercisesIds");
     }
 
     public async Task<IEnumerable<Exercise>?> GetAllAsync()
     {
-        var exercises = await this.collection.FindAsync(f => f.IsApproved == false);
+        var exercises = await this.collection.FindAsync(f => f.IsApproved == true);
 
         var allexercises = exercises.ToList();
 
@@ -38,6 +41,10 @@ public class ExerciseMongoRepository : IExerciseRepository
 
     public async Task CreateAsync(Exercise exercise)
     {
+        var lastIndex = this.collection.Find(e => e.Id >= 0).ToList().Last().Id;
+
+        exercise.Id = lastIndex + 1;
+
         await this.collection.InsertOneAsync(exercise);
     }
 
@@ -48,6 +55,8 @@ public class ExerciseMongoRepository : IExerciseRepository
 
     public async Task UpdateAsync(int id, Exercise exercise)
     {
+        exercise.Id = id;
+
         await this.collection.ReplaceOneAsync<Exercise>(filter: ex => ex.Id == id, replacement: exercise);
     }
 }

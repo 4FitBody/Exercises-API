@@ -16,6 +16,6 @@ public class DeleteHandler : IRequestHandler<DeleteCommand>
     {
         ArgumentNullException.ThrowIfNull(request.Id);
 
-        await this.exerciseRepository.DeleteAsync((int)request.Id);
+        await this.exerciseRepository.DeleteAsync(request.Id);
     }
 }
