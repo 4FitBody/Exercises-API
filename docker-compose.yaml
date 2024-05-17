@@ -14,7 +14,7 @@ services:
     ports:
       - 10010:8080
     networks:
-      - exercisebridgenetwork
+      - mongobridgenetwork
     restart: always
 
   mongodb:
