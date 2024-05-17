@@ -97,7 +97,7 @@ public class ExerciseController : ControllerBase
 
         await this.sender.Send(createCommand);
 
-        return base.RedirectToAction(actionName: "Index");
+        return base.Ok();
     }
 
     [HttpPut]
@@ -119,6 +119,6 @@ public class ExerciseController : ControllerBase
 
         await this.sender.Send(createCommand);
 
-        return base.RedirectToAction(actionName: "Index");
+        return base.Ok();
     }
 }

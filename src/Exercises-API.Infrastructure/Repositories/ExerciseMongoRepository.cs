@@ -57,6 +57,10 @@ public class ExerciseMongoRepository : IExerciseRepository
     {
         exercise.Id = id;
 
+        var oldExercise = await this.GetByIdAsync(id);
+
+        exercise.GifUrl = oldExercise.GifUrl;
+
         await this.collection.ReplaceOneAsync<Exercise>(filter: ex => ex.Id == id, replacement: exercise);
     }
 }
